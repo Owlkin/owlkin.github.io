@@ -14,30 +14,53 @@
 	<!--[if lt IE 9]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
+	
+	
 </head>
 
 <body>
 
-  
-	<div id="container">
 
+	
+	
+	<div id="container">
 		<div id="gameboard">
 			<ul>
 			
 			</ul>
 		</div>
-
-		<div id="scoreboard">
-			<div id="scorecounter">
-				<p>Score: 0/8</p>
-			</div>
-			<button class="button" id="startbutton">
-				<p>Shuffle!</p>
-			</button>
-			<button class="button" id="resetbutton">
-				<p>Reset!</p>
-			</button>
+		
+		<div id="scorecounter">
+				<p>Main Objective: Hunt 8 Monsters</p>
 		</div>
+		
+		<div class="volume" id="volumedisplay">
+			<p>Volume:</p>
+			<p>0.5</p>
+		</div>
+		<div class="volume" id="volumemute">
+			<p>x</p>
+		</div>
+		<div class="volume" id="volumedown">
+			<p>-</p>
+		</div>
+		<div class="volume" id="volumeup">
+			<p>+</p>
+		</div>
+		
+		<audio src="audio/proofofahero.mp3" id="proofofahero" controls>
+			<p>Your browser does not support the <code>audio</code> element.</p>
+		</audio>
+		<audio src="audio/questclear.mp3" id="questclear" controls>
+			<p>Your browser does not support the <code>audio</code> element.</p>
+		</audio>
+		<audio src="audio/questfailed.mp3" id="questfailed" controls>
+			<p>Your browser does not support the <code>audio</code> element.</p>
+		</audio>
+		
+		<button class="button" id="startbutton">
+			<p>HUNT!</p>
+		</button>
 
 	</div>
 	

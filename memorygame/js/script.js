@@ -22,10 +22,8 @@
         return $(shuffled);
  
     };
-
+	
 	//-------------------------------------------------------------
-	
-	
 	
 	var memoryTile = {
 		name: ["brachy", "brachy", "gore", "gore", "malfestio", "malfestio", "rathalos", "rathalos", "rathian", "rathian", "sQueen", "sQueen", "steve", "steve", "tigrex", "tigrex"],
@@ -73,12 +71,28 @@
 					tileClickedName.pop($tile.data("tilename"));
 					scoreCounter = scoreCounter + 1;
 					$('.selected').addClass("matched").removeClass("selected");	
-					$("#scorecounter").empty().append("<p>" + "Score: " + scoreCounter + "/8</p>");
+					$("#scorecounter").empty().append("<p>" + "Monsters: " + scoreCounter + "/8</p>");
 					if ( scoreCounter == 8 ) {
-						alert("You win!");
+						proofofahero.pause();
+						questclear.play();
+						$('.deselected').addClass("finished").removeClass("deselected");
+						$('.selected').addClass("finished").removeClass("selected");
+						$('.matched').addClass("finished").removeClass("matched");
+						$("#scorecounter").empty().append("<p>QUEST CLEAR!</p>");
+						$("#startbutton").css('visibility', 'visible');
+						$("#startbutton").empty().append("<p>Depart on the next hunt!</p>");
+						$("#startbutton").fadeTo( 400, 1);
+						$(".tile").fadeTo( 400, 0);
+						$(".tile").children().fadeTo(400, 0);
+						window.setTimeout( function () { 
+							$("#startbutton").click(function() {
+								location.reload();
+							});
+						},1000);
 					}
 				},500);
 			}
+			
 		}
 		
 	}
@@ -89,11 +103,55 @@
 	
 	var pairCounter = 0
 	var scoreCounter = 0
+	
+	var proofofahero = document.getElementById("proofofahero");
+	var questclear = document.getElementById("questclear");
+	var questfailed = document.getElementById("questfailed");
+	
+	var vol = 0.5;
+	questclear.volume= vol;
+	proofofahero.volume= vol;
+	questfailed.volume= vol;
 
 $( document ).ready(function() {
 
 	$("#startbutton").click(function() {
 
+		if ( $(':animated').length ) {
+			return false;
+		} else {
+			$("#startbutton").fadeTo( 400, 0);
+			window.setTimeout( function () {
+				$("#startbutton").css('visibility', 'hidden');
+			},500);
+		}
+		
+		$("#scorecounter").empty().append("<p>Monsters: 0/8</p>");
+		
+		window.setTimeout( function () {
+			if ( scoreCounter != 8 ) {
+				scoreCounter = 0;
+				proofofahero.pause();
+				questfailed.play();
+				$("#scorecounter").empty().append("<p>QUEST FAILED...</p>");
+				$("#startbutton").css('visibility', 'visible');
+				$("#startbutton").empty().append("<p>Return to camp?</p>");
+				$("#startbutton").fadeTo( 400, 1);
+				$('.deselected').addClass("finished").removeClass("deselected");
+				$('.selected').addClass("finished").removeClass("selected");
+				$('.matched').addClass("finished").removeClass("matched");
+				$("#startbutton").click(function() {
+					location.reload();
+				});
+			} else {
+				
+			}
+		},93000); //93000 for easy
+		
+		proofofahero.play();
+		proofofahero.currentTime = 0;
+		
+		
 		
 		$(".tile img").fadeTo( 400, 0);
 		window.setTimeout( function () { 
@@ -116,16 +174,63 @@ $( document ).ready(function() {
 			
 	});
 
-	$("#resetbutton").click(function() {
-		$(".tile img").css('visibility', 'visible');
-		$(".tile img").fadeTo( 500, 1);
-		pairCounter = 0;
-		scoreCounter = 0;
-		var tileClickedName = [];
-		var tileClickedElement = [];
-		$("#scorecounter").empty().append("<p>" + "Score: 0/8</p>");
-		//location.reload(); //Temporary? page refresh
-	});
+	
+	$("#volumemute").click(function() {
+		if ( $(this).hasClass("muted") ) {
+			$('#volumemute').removeClass("muted");
+				vol = 0.5;
+				var volrounded = Math.round( vol * 10 ) / 10;
+				questclear.volume= vol;
+				proofofahero.volume= vol;
+				questfailed.volume= vol;
+				$("#volumedisplay").empty().append("<p>Volume:</p>" + "<p>" + volrounded + "</p>");
+		} else {
+			$('#volumemute').addClass("muted");
+				vol = 0;
+				var volrounded = Math.round( vol * 10 ) / 10;
+				questclear.volume= vol;
+				proofofahero.volume= vol;
+				questfailed.volume= vol;
+				$("#volumedisplay").empty().append("<p>Volume:</p>" + "<p>" + "Muted" + "</p>");
+		}
+	});	
+	
+	$("#volumeup").click(function() {
+		if ( vol < 1 ) {
+			vol = vol + 0.1;
+			var volrounded = Math.round( vol * 10 ) / 10;
+			questclear.volume= vol;
+			proofofahero.volume= vol;
+			questfailed.volume= vol;
+			$("#volumedisplay").empty().append("<p>Volume:</p>" + "<p>" + volrounded + "</p>");
+		} else {
+			
+		}
+	});	
+	
+	$("#volumedown").click(function() {
+		if ( vol > 0 ) {
+			vol = vol - 0.1;
+			var volrounded = Math.round( vol * 10 ) / 10;
+			questclear.volume= vol;
+			proofofahero.volume= vol;
+			questfailed.volume= vol;
+			$("#volumedisplay").empty().append("<p>Volume:</p>" + "<p>" + volrounded + "</p>");
+		} else {
+			
+		}
+	});		
+	
+	
 	
 	memoryTile.setup();
 });
+
+
+
+
+
+
+
+
+
