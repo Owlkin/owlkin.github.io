@@ -1,0 +1,69 @@
+ * {
+	box-sizing: border-box;
+ }
+ 
+ #container {
+	background-color: grey;
+	width: 60%;
+	margin: 0 20%;
+    height: 100vh;
+ }
+ 
+ body, html, p {
+	margin: 0px;
+	padding: 0px;
+ }
+ 
+ body {
+	background-color: grey;
+ }
+ 
+ #gameboard ul {
+	padding: 0;
+	margin: 0;
+	display: inline-flex;
+	flex-flow: row wrap;
+ }
+ 
+ .tile {
+	width: 24%;
+	padding: .5em;
+	list-style: none;
+	text-align: center;
+	margin: .5%;
+	background-color: white;
+	flex-grow: 1;
+	border-radius: .5em;
+	border: 2px solid black;
+ }
+ 
+ .tile img {
+	width: 100%;
+	height: 100%;
+ }
+ 
+.button {
+	width: 100%;
+	height: 50px;
+	background-color: blue;
+	color: white;
+ }
+ 
+ #scorecounter {
+	height: 50px;
+	text-align: center;
+	background-color: white;
+	border-radius: .5em;
+	margin: .5%;
+	padding: .5em;
+	border: 2px solid black;
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
